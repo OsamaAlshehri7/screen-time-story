@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root{
-    --bg-deep:#0E1526; 
+    --bg-deep:#0E1526;
     --bg:#151F38;
     --surface:#1D2A4A;
     --surface-2:#243258;
@@ -201,9 +201,49 @@
     section{padding:80px 0;}
     .cal-grid{grid-template-columns:repeat(18,1fr);}
   }
+
+  /* ---------- SCROLLYTELLING UI ---------- */
+  .progress-bar{
+    position:fixed; top:0; left:0; width:100%; height:3px;
+    background:rgba(234,240,250,0.06); z-index:200;
+  }
+  .progress-fill{
+    height:100%; width:0%;
+    background:linear-gradient(90deg, var(--accent), var(--accent-2));
+    transition:width 0.08s linear;
+  }
+  .section-nav{
+    position:fixed; left:26px; top:50%; transform:translateY(-50%);
+    z-index:150; display:flex; flex-direction:column; gap:16px;
+  }
+  .section-nav .dot{
+    width:9px; height:9px; border-radius:50%;
+    background:var(--surface-2); border:1px solid var(--line);
+    display:block; cursor:pointer; transition:all 0.35s ease;
+  }
+  .section-nav .dot.active{
+    background:var(--accent); transform:scale(1.5);
+    box-shadow:0 0 0 5px rgba(242,184,75,0.14);
+    border-color:var(--accent);
+  }
+  @media (max-width:900px){
+    .section-nav{display:none;}
+  }
 </style>
 </head>
 <body>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<nav class="section-nav" id="sectionNav">
+  <a class="dot" data-target="climb" title="الخط الزمني"></a>
+  <a class="dot" data-target="breakdown" title="إلى وين يروح الوقت"></a>
+  <a class="dot" data-target="calendar" title="لو جمعناها"></a>
+  <a class="dot" data-target="world" title="مقارنة عالمية"></a>
+  <a class="dot" data-target="tension" title="وين تبدأ المشكلة"></a>
+  <a class="dot" data-target="calculator" title="وش وضعك انت"></a>
+</nav>
+
 
 <!-- HERO -->
 <div class="hero">
@@ -227,7 +267,7 @@
 
   <!-- THE CLIMB -->
   <section id="climb">
-    <div class="eyebrow"><span class="num">01 ·</span> الخط الزمني</div>
+    <div class="eyebrow">الخط الزمني <span class="num">· 01</span></div>
     <h2 class="reveal">من <span class="hl">٦ ساعات و٩ دقايق</span> إلى <span class="hl">٦ ساعات و٥٤ دقيقة</span> في ١٢ سنة</h2>
     <p class="lead reveal">الرحلة ما كانت خط مستقيم. كانت صعود هادئ، قفزة حادة وقت الجائحة، محاولة تراجع بسيطة... وبعدها رجعت تصعد من جديد.</p>
     <div class="chart-card reveal">
@@ -237,7 +277,7 @@
 
   <!-- BREAKDOWN -->
   <section id="breakdown">
-    <div class="eyebrow"><span class="num">02 ·</span> إلى وين يروح الوقت</div>
+    <div class="eyebrow">إلى وين يروح الوقت <span class="num">· 02</span></div>
     <h2 class="reveal">الجوال يستحوذ على <span class="hl">أكثر من نص</span> وقتك أمام الشاشات</h2>
     <p class="lead reveal">من كل الوقت اللي تقضيه على الشاشات، الجوال ياخذ الحصة الأكبر. وجزء كبير من وقت الجوال نفسه يروح لمكان واحد: السوشيال ميديا.</p>
     <div class="chart-card reveal">
@@ -251,7 +291,7 @@
 
   <!-- CALENDAR -->
   <section id="calendar">
-    <div class="eyebrow"><span class="num">03 ·</span> لو جمعناها</div>
+    <div class="eyebrow">لو جمعناها <span class="num">· 03</span></div>
     <h2 class="reveal">٦ ساعات يوميًا تعني <span class="hl">٤٩ يوم كامل</span> في السنة</h2>
     <p class="lead reveal">كل نقطة تحت تمثل يوم من أيام السنة. النقاط المضيئة هي الأيام اللي — لو جمعت ساعات شاشتك — تكفي تعيشها كاملة أمام شاشة.</p>
     <div class="cal-wrap reveal">
@@ -265,7 +305,7 @@
 
   <!-- WORLD -->
   <section id="world">
-    <div class="eyebrow"><span class="num">04 ·</span> مقارنة عالمية</div>
+    <div class="eyebrow">مقارنة عالمية <span class="num">· 04</span></div>
     <h2 class="reveal">مو كل العالم <span class="hl">يعيش نفس القصة</span></h2>
     <p class="lead reveal">وقت الشاشة يختلف بشكل كبير من بلد لبلد — يتأثر بالثقافة، والاقتصاد، وحتى بعدد ساعات العمل.</p>
     <div class="chart-card reveal">
@@ -275,7 +315,7 @@
 
   <!-- TENSION -->
   <section id="tension">
-    <div class="eyebrow"><span class="num">05 ·</span> وين تبدأ المشكلة</div>
+    <div class="eyebrow">وين تبدأ المشكلة <span class="num">· 05</span></div>
     <h2 class="reveal">الأرقام بدأت <span class="hl">تلمس شي أعمق</span></h2>
     <p class="lead reveal">ما كل زيادة في وقت الشاشة مصدر قلق. لكن بعض الأنماط تستاهل وقفة.</p>
     <div class="callout reveal">
@@ -286,7 +326,7 @@
 
   <!-- CALCULATOR -->
   <section id="calculator">
-    <div class="eyebrow"><span class="num">06 ·</span> وش وضعك انت</div>
+    <div class="eyebrow">وش وضعك انت <span class="num">· 06</span></div>
     <h2 class="reveal">حرّك الرقم... <span class="hl">وشوف قصتك انت</span></h2>
     <p class="lead reveal">هذا مو تخويف ولا دعوة تسيب جوالك. بس أول خطوة في أي قصة بيانات حقيقية: تعرف رقمك انت.</p>
     <div class="calc-card reveal">
@@ -327,97 +367,122 @@
   Chart.defaults.color = '#93A4C7';
   Chart.defaults.borderColor = 'rgba(234,240,250,0.08)';
 
-  // 1) CLIMB LINE CHART
-  new Chart(document.getElementById('climbChart'), {
-    type: 'line',
-    data: {
-      labels: ['2013', '2021 (ذروة الجائحة)', '2022 (تراجع بسيط)', '2025 (اليوم)'],
-      datasets: [{
-        label: 'ساعات الشاشة يوميًا',
-        data: [6.15, 6.97, 6.60, 6.90],
-        borderColor: '#F2B84B',
-        backgroundColor: 'rgba(242,184,75,0.12)',
-        pointBackgroundColor: '#F2B84B',
-        pointRadius: 5,
-        tension: 0.35,
-        fill: true,
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => {
-              const h = Math.floor(ctx.parsed.y);
-              const m = Math.round((ctx.parsed.y - h) * 60);
-              return `${h} ساعة و${m} دقيقة`;
+  // ---- CHART FACTORY FUNCTIONS (only build when scrolled into view) ----
+  function buildClimbChart(){
+    new Chart(document.getElementById('climbChart'), {
+      type: 'line',
+      data: {
+        labels: ['2013', '2021 (ذروة الجائحة)', '2022 (تراجع بسيط)', '2025 (اليوم)'],
+        datasets: [{
+          label: 'ساعات الشاشة يوميًا',
+          data: [6.15, 6.97, 6.60, 6.90],
+          borderColor: '#F2B84B',
+          backgroundColor: 'rgba(242,184,75,0.12)',
+          pointBackgroundColor: '#F2B84B',
+          pointRadius: 5,
+          tension: 0.35,
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        animation: { duration: 1400, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const h = Math.floor(ctx.parsed.y);
+                const m = Math.round((ctx.parsed.y - h) * 60);
+                return `${h} ساعة و${m} دقيقة`;
+              }
             }
           }
+        },
+        scales: {
+          y: { min: 5.5, max: 7.5, grid: { color: 'rgba(234,240,250,0.06)' }, ticks: { callback: v => v + 'h' } },
+          x: { grid: { display: false } }
         }
+      }
+    });
+  }
+
+  function buildDeviceChart(){
+    new Chart(document.getElementById('deviceChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['الجوال', 'الكمبيوتر / أجهزة أخرى'],
+        datasets: [{
+          data: [53, 47],
+          backgroundColor: ['#F2B84B', '#243258'],
+          borderColor: '#1D2A4A',
+          borderWidth: 4,
+        }]
       },
-      scales: {
-        y: { min: 5.5, max: 7.5, grid: { color: 'rgba(234,240,250,0.06)' }, ticks: { callback: v => v + 'h' } },
-        x: { grid: { display: false } }
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        cutout: '68%',
+        animation: { duration: 1200, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { position: 'bottom', labels: { padding: 18 } },
+          tooltip: { callbacks: { label: (ctx) => ctx.label + ': ' + ctx.parsed + '%' } }
+        }
       }
-    }
-  });
+    });
+  }
 
-  // 2) DEVICE DOUGHNUT
-  new Chart(document.getElementById('deviceChart'), {
-    type: 'doughnut',
-    data: {
-      labels: ['الجوال', 'الكمبيوتر / أجهزة أخرى'],
-      datasets: [{
-        data: [53, 47],
-        backgroundColor: ['#F2B84B', '#243258'],
-        borderColor: '#1D2A4A',
-        borderWidth: 4,
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      cutout: '68%',
-      plugins: {
-        legend: { position: 'bottom', labels: { padding: 18 } },
-        tooltip: { callbacks: { label: (ctx) => ctx.label + ': ' + ctx.parsed + '%' } }
-      }
-    }
-  });
-
-  // 3) COUNTRY BAR CHART
-  new Chart(document.getElementById('countryChart'), {
-    type: 'bar',
-    data: {
-      labels: ['البرازيل', 'أمريكا', 'المتوسط العالمي', 'اليابان'],
-      datasets: [{
-        label: 'ساعات الجوال يوميًا',
-        data: [5.47, 4.50, 4.62, 3.25],
-        backgroundColor: ['#FF6F91', '#F2B84B', '#5FD3C4', '#93A4C7'],
-        borderRadius: 8,
-      }]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => {
-              const h = Math.floor(ctx.parsed.x);
-              const m = Math.round((ctx.parsed.x - h) * 60);
-              return `${h} ساعة و${m} دقيقة`;
+  function buildCountryChart(){
+    new Chart(document.getElementById('countryChart'), {
+      type: 'bar',
+      data: {
+        labels: ['البرازيل', 'أمريكا', 'المتوسط العالمي', 'اليابان'],
+        datasets: [{
+          label: 'ساعات الجوال يوميًا',
+          data: [5.47, 4.50, 4.62, 3.25],
+          backgroundColor: ['#FF6F91', '#F2B84B', '#5FD3C4', '#93A4C7'],
+          borderRadius: 8,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        animation: { duration: 1200, easing: 'easeOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const h = Math.floor(ctx.parsed.x);
+                const m = Math.round((ctx.parsed.x - h) * 60);
+                return `${h} ساعة و${m} دقيقة`;
+              }
             }
           }
+        },
+        scales: {
+          x: { grid: { color: 'rgba(234,240,250,0.06)' }, ticks: { callback: v => v + 'h' } },
+          y: { grid: { display: false } }
         }
-      },
-      scales: {
-        x: { grid: { color: 'rgba(234,240,250,0.06)' }, ticks: { callback: v => v + 'h' } },
-        y: { grid: { display: false } }
       }
-    }
+    });
+  }
+
+  // Trigger each chart's build the moment its card scrolls into view — not on page load
+  const chartBuilders = {
+    climbChart: buildClimbChart,
+    deviceChart: buildDeviceChart,
+    countryChart: buildCountryChart,
+  };
+  const chartIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fn = chartBuilders[entry.target.id];
+        if (fn) { fn(); chartIo.unobserve(entry.target); }
+      }
+    });
+  }, { threshold: 0.35 });
+  Object.keys(chartBuilders).forEach(id => {
+    chartIo.observe(document.getElementById(id));
   });
 
   // ---- CALENDAR GRID (365 days, 49 highlighted) ----
@@ -450,6 +515,40 @@
     });
   }, { threshold: 0.2 });
   calIo.observe(document.getElementById('calGrid'));
+
+  // ---- SCROLL PROGRESS BAR ----
+  const progressFill = document.getElementById('progressFill');
+  function updateProgress(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressFill.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // ---- SECTION DOT NAVIGATION (active state + click to jump) ----
+  const navDots = document.querySelectorAll('.section-nav .dot');
+  const storySections = document.querySelectorAll('section[id]');
+
+  navDots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const target = document.getElementById(dot.dataset.target);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  const sectionIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const dot = document.querySelector(`.section-nav .dot[data-target="${entry.target.id}"]`);
+      if (!dot) return;
+      if (entry.isIntersecting) {
+        navDots.forEach(d => d.classList.remove('active'));
+        dot.classList.add('active');
+      }
+    });
+  }, { threshold: 0.5 });
+  storySections.forEach(s => sectionIo.observe(s));
 
   // ---- CALCULATOR ----
   const hoursRange = document.getElementById('hoursRange');
