@@ -338,7 +338,6 @@
       <div class="calc-out">
         <div class="box"><span class="n" id="outDays">98</span><span class="l">يوم كامل في السنة</span></div>
         <div class="box"><span class="n" id="outPct">40%</span><span class="l">من ساعات يقظتك تقريبًا</span></div>
-        <div class="box"><span class="n" id="outMovies">1186</span><span class="l">فيلم لو تحولت لأفلام (٢ ساعة لكل فيلم)</span></div>
       </div>
     </div>
   </section>
@@ -556,14 +555,12 @@
   const hoursVal = document.getElementById('hoursVal');
   const outDays = document.getElementById('outDays');
   const outPct = document.getElementById('outPct');
-  const outMovies = document.getElementById('outMovies');
 
   function updateCalc() {
     const h = parseFloat(hoursRange.value);
     hoursVal.textContent = h + 'h';
     outDays.textContent = Math.round((h * 365) / 24);
     outPct.textContent = Math.min(99, Math.round((h / 16) * 100)) + '%';
-    outMovies.textContent = Math.round((h * 365) / 2);
   }
   hoursRange.addEventListener('input', updateCalc);
   updateCalc();
